@@ -4,6 +4,7 @@ import com.codecool.dungeoncrawl.data.Cell;
 
 public class Skeleton extends Actor {
     public Skeleton(Cell cell) {
+
         super(cell);
     }
 

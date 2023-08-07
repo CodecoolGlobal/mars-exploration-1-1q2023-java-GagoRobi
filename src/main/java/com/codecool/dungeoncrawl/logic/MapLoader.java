@@ -43,7 +43,7 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
                             break;
-                        case 'x':
+                        case '-':
                             cell.setType(CellType.FLOOR);
                             new Sword(cell);
                             break;

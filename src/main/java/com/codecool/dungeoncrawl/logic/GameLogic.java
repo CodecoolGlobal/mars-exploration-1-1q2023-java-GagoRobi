@@ -19,7 +19,10 @@ public class GameLogic {
     }
 
     public void setup() {
+        System.out.println("setup");
+
     }
+
 
     public Cell getCell(int x, int y) {
         return map.getCell(x, y);

@@ -45,12 +45,12 @@ public class Skeleton extends Actor {
             return null;
         } else {
             return getCell().getNeighbor(XCoordinates, YCoordinates).getActor();
-
         }
-
     }
 
-    public void lookAround() {
+    @Override
+    public void calculateDamage() {
+        System.out.println("skeleton hp: " + getHealth());
         Actor actor = findEnemy();
         if (actor.getTileName().equals("player")) {
             actor.setHealth(actor.getHealth() - 2);
@@ -61,16 +61,9 @@ public class Skeleton extends Actor {
         } else if (actor.getTileName().equals("player")) {
             actor.setHealth(actor.getHealth() - 2);
         }
-    }
-
-    @Override
-    public void calculateDamage() {
-        //System.out.println("skeleton hp: "+getHealth());
-        //System.out.println("skeleton HP: " + getCell().getNeighbor(getCell().getX(),getCell().getY()).getActor().getHealth());
-        lookAround();
-//        if(getHealth() <=0){
-//            super.getCell().setActor(null);
-//        }
+        if (getHealth() <= 0) {
+            super.getCell().setActor(null);
+        }
     }
 
     @Override

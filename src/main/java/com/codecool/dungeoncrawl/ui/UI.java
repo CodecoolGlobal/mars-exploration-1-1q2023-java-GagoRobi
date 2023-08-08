@@ -39,7 +39,6 @@ public class UI {
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
     }
-
     private void onKeyPressed(KeyEvent keyEvent) {
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());

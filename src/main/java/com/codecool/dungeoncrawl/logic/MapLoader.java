@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
+import com.codecool.dungeoncrawl.data.doors.Door;
 import com.codecool.dungeoncrawl.data.items.Key;
 import com.codecool.dungeoncrawl.data.items.Sword;
 
@@ -51,6 +52,10 @@ public class MapLoader {
                         case 'k':
                             cell.setType(CellType.FLOOR);
                             new Key(cell);
+                            break;
+                        case 'd':
+                            cell.setType(CellType.DOOR);
+                            new Door(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

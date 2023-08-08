@@ -7,8 +7,12 @@ import com.codecool.dungeoncrawl.data.items.Item;
 import java.util.HashSet;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Player extends Actor {
+    boolean hasSword = false;
+    private Actor neighbourEnemy;
+    private final int baseStrength = 5;
     private Cell cell = getCell();
     private final Set<Item> inventory = new HashSet<>();
 
@@ -45,9 +49,9 @@ public class Player extends Actor {
 @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-
         if (nextCell.getType() == CellType.FLOOR) {
             if (nextCell.getActor() != null) {
+                neighbourEnemy = nextCell.getActor();
                 fight(dx, dy);
             } else {
                 if (nextCell.getItem() != null) {
@@ -76,7 +80,14 @@ public class Player extends Actor {
 
     @Override
     public void calculateDamage() {
-        setHealth(getHealth() - 2);
+        int dmgMultiplier = 1;
+
+        if(!inventory.stream().filter(i-> i.getTileName().equals("sword")).collect(Collectors.toList()).isEmpty()){
+        dmgMultiplier = 2;
+
+        }
+        neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (baseStrength * dmgMultiplier));
+        //setHealth(getHealth() - 2);
     }
 
 }

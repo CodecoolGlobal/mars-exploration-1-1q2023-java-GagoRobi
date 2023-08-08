@@ -25,13 +25,52 @@ public class Skeleton extends Actor {
         return null;
     }
 
+    public Actor findEnemy() {
+        int XCoordinates = 0;
+        int YCoordinates = 0;
+        if (getCell().getNeighbor(0, 1).getActor() != null) {
+            XCoordinates = 0;
+            YCoordinates = 1;
+        } else if (getCell().getNeighbor(0, -1).getActor() != null) {
+            XCoordinates = 0;
+            YCoordinates = -1;
+        } else if (getCell().getNeighbor(1, 0).getActor() != null) {
+            XCoordinates = 1;
+            YCoordinates = 0;
+        } else if (getCell().getNeighbor(-1, 0).getActor() != null) {
+            XCoordinates = -1;
+            YCoordinates = 0;
+        }
+        if (XCoordinates == 0 && YCoordinates == 0) {
+            return null;
+        } else {
+            return getCell().getNeighbor(XCoordinates, YCoordinates).getActor();
+
+        }
+
+    }
+
+    public void lookAround() {
+        Actor actor = findEnemy();
+        if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        }
+    }
+
     @Override
     public void calculateDamage() {
-        System.out.println("skeleton hp: "+getHealth());
-        setHealth(getHealth()-5);
-        if(getHealth() <=0){
-            super.getCell().setActor(null);
-        }
+        //System.out.println("skeleton hp: "+getHealth());
+        //System.out.println("skeleton HP: " + getCell().getNeighbor(getCell().getX(),getCell().getY()).getActor().getHealth());
+        lookAround();
+//        if(getHealth() <=0){
+//            super.getCell().setActor(null);
+//        }
     }
 
     @Override
@@ -44,7 +83,6 @@ public class Skeleton extends Actor {
     public String getTileName() {
         return "skeleton";
     }
-
 
 
 }

@@ -11,7 +11,8 @@ import java.util.Set;
 public class Player extends Actor {
     private Cell cell = getCell();
     private final Set<Item> inventory = new HashSet<>();
-    public void pickUpItem (Item item) {
+
+    public void pickUpItem(Item item) {
         inventory.add(item);
         System.out.println("item picked");
     }
@@ -19,6 +20,7 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
     }
+
     @Override
     public String checkForEnemy(int dx, int dy) {
         Actor neighbourActor = cell.getNeighbor(dx, dy).getActor();
@@ -34,20 +36,7 @@ public class Player extends Actor {
             cell.getNeighbor(dx, dy).getActor().calculateDamage();
         }
     }
-@Override
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        fight(dx, dy);
 
-        if (nextCell.getType() == CellType.FLOOR && nextCell.getActor() == null) {
-            if (nextCell.getItem() != null) {
-                //System.out.println(nextCell.getItem().getTileName());
-            }
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-        }
-    }
 
     public String getTileName() {
         return "player";
@@ -55,29 +44,20 @@ public class Player extends Actor {
 
 
     public void move(int dx, int dy) {
-
         Cell nextCell = cell.getNeighbor(dx, dy);
-
 
         if (nextCell.getType() == CellType.FLOOR) {
             if (nextCell.getActor() != null) {
-                System.out.println(nextCell.getActor().getTileName());
+                fight(dx, dy);
             } else {
-                if (nextCell.getType() == CellType.FLOOR) {
-
-                }
                 if (nextCell.getItem() != null) {
                     System.out.println(nextCell.getItem().getTileName());
-
                     pickUpItem(nextCell.getItem());
                     nextCell.setItem(null);
                 }
-
-
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
-
             }
 
         }
@@ -96,7 +76,7 @@ public class Player extends Actor {
 
     @Override
     public void calculateDamage() {
-        setHealth(getHealth()-2);
+        setHealth(getHealth() - 2);
     }
 
 }

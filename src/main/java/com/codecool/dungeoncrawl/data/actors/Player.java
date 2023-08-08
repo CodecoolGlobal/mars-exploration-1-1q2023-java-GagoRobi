@@ -42,7 +42,7 @@ public class Player extends Actor {
         return "player";
     }
 
-
+@Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
 

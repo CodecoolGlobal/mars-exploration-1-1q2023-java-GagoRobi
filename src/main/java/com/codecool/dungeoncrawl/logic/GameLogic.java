@@ -19,6 +19,7 @@ public class GameLogic {
     }
 
     public void setup() {
+
     }
 
     public Cell getCell(int x, int y) {

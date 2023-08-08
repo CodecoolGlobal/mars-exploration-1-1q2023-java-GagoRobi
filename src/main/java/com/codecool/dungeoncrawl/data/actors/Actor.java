@@ -3,8 +3,12 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.Drawable;
+import com.codecool.dungeoncrawl.data.GameMap;
+import com.codecool.dungeoncrawl.logic.FightLogic;
+import com.codecool.dungeoncrawl.logic.GameLogic;
 
-public abstract class Actor implements Drawable {
+public abstract class Actor implements Drawable, FightLogic{
+
     private Cell cell;
     private int health = 10;
 
@@ -20,10 +24,16 @@ public abstract class Actor implements Drawable {
         Cell nextCell = cell.getNeighbor(dx, dy);
 
 
-        if(nextCell.getType() == CellType.FLOOR  ){
+        if(nextCell.getType() == CellType.FLOOR){
             if(nextCell.getActor() != null ){
-                enemy = true;
-                System.out.println(nextCell.getActor().getTileName());
+                enemy = true;/**/
+                System.out.println(getHealth());
+                //calculateDamage();
+                nextCell.getActor().calculateDamage();
+                //System.out.println("Skeleton health: " +nextCell.getActor().getHealth());
+
+                //System.out.println(nextCell.getActor().getTileName());
+
             }else{
               if(nextCell.getItem() != null){
                 System.out.println(nextCell.getItem().getTileName());
@@ -40,6 +50,10 @@ public abstract class Actor implements Drawable {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public Cell getCell() {

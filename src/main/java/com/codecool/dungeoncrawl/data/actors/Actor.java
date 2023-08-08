@@ -3,14 +3,22 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.Drawable;
+
+import com.codecool.dungeoncrawl.data.items.Item;
+import com.codecool.dungeoncrawl.data.items.Key;
+
+import java.util.HashSet;
+
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.logic.FightLogic;
 import com.codecool.dungeoncrawl.logic.GameLogic;
 
 public abstract class Actor implements Drawable, FightLogic {
 
+
     private Cell cell;
     private int health = 10;
+
 
     public Actor(Cell cell) {
         this.cell = cell;

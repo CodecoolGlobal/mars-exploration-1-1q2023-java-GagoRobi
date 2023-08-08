@@ -1,10 +1,14 @@
 package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
+
+import com.codecool.dungeoncrawl.data.CellType;
+
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.logic.FightLogic;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
 import javafx.scene.input.KeyEvent;
+
 
 public class Skeleton extends Actor {
     public Skeleton(Cell cell) {
@@ -15,6 +19,7 @@ public class Skeleton extends Actor {
     public void move(int dx, int dy) {
 
     }
+
     @Override
     public String checkForEnemy(int dx, int dy) {
         return null;
@@ -34,10 +39,12 @@ public class Skeleton extends Actor {
         return super.getHealth();
     }
 
+
     @Override
     public String getTileName() {
         return "skeleton";
     }
+
 
 
 }

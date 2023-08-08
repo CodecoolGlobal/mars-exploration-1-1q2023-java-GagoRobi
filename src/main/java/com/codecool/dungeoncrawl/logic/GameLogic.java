@@ -23,6 +23,7 @@ public class GameLogic {
 
     }
 
+
     public Cell getCell(int x, int y) {
         return map.getCell(x, y);
     }

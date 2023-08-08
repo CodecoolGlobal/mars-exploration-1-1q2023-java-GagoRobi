@@ -27,6 +27,7 @@ public abstract class Actor implements Drawable {
             }else{
               if(nextCell.getItem() != null){
                 System.out.println(nextCell.getItem().getTileName());
+
                 }
                 enemy = false;
                 cell.setActor(null);

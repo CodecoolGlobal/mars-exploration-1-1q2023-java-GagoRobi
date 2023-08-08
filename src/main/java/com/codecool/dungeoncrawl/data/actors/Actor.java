@@ -16,6 +16,7 @@ public abstract class Actor implements Drawable {
     }
 
     public void move(int dx, int dy) {
+
         Cell nextCell = cell.getNeighbor(dx, dy);
 
 
@@ -24,6 +25,9 @@ public abstract class Actor implements Drawable {
                 enemy = true;
                 System.out.println(nextCell.getActor().getTileName());
             }else{
+              if(nextCell.getItem() != null){
+                System.out.println(nextCell.getItem().getTileName());
+                }
                 enemy = false;
                 cell.setActor(null);
                 nextCell.setActor(this);
@@ -32,7 +36,6 @@ public abstract class Actor implements Drawable {
             }
 
         }
-
     }
 
     public int getHealth() {

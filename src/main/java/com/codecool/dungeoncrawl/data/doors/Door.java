@@ -8,6 +8,7 @@ import com.codecool.dungeoncrawl.data.items.Key;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class Door implements Drawable {
     private Cell cell;
@@ -19,7 +20,7 @@ public class Door implements Drawable {
     }
 
 
-    public boolean checkPlayerAccess(HashSet <Item> inventory){
+    public boolean checkPlayerAccess(Set<Item> inventory){
 
          for (Item item : inventory) {
              if (item.getTileName().equals("key")){

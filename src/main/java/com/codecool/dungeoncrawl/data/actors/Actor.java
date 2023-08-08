@@ -20,7 +20,7 @@ public abstract class Actor implements Drawable {
     }
 
 
-    public abstract void  move(int dx, int dy);
+    public abstract void move(int dx, int dy);
 
     public int getHealth() {
         return health;

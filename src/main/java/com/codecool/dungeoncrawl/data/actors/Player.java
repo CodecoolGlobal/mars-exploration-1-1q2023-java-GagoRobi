@@ -19,29 +19,6 @@ public class Player extends Actor {
         super(cell);
     }
 
-
-    @Override
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-
-        if(nextCell.getType() == CellType.FLOOR  ){
-            if(nextCell.getActor() != null ){
-                System.out.println(nextCell.getActor().getTileName());
-            }else{
-                if(nextCell.getItem() != null){
-                    System.out.println(nextCell.getItem().getTileName());
-                    pickUpItem(nextCell.getItem());
-                    nextCell.setItem(null);
-                }
-
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
-            }
-        }
-    }
-
-
     public String getTileName() {
         return "player";
     }
@@ -60,6 +37,9 @@ public class Player extends Actor {
                 }
                 if (nextCell.getItem() != null) {
                     System.out.println(nextCell.getItem().getTileName());
+
+                    pickUpItem(nextCell.getItem());
+                    nextCell.setItem(null);
                 }
 
 
@@ -72,8 +52,7 @@ public class Player extends Actor {
         }
 
         if (nextCell.getType() == CellType.DOOR) {
-            //inventory.add(new Key(nextCell));//TODO
-            // Now this place new key instead of the door but this not wont happen if the key exist in the invertory,
+
             if (nextCell.getDoor().checkPlayerAccess(inventory)) {
                 cell.setActor(null);
                 nextCell.setActor(this);

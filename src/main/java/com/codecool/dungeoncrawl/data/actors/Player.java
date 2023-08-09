@@ -23,7 +23,7 @@ public class Player extends Actor {
 
     public void pickUpItem(Item item) {
         System.out.println("pick up called");
-        if(!inventory.add(item)) {
+        if (!inventory.add(item)) {
             inventory.add(item);
         }
         System.out.println(inventory.contains(item));
@@ -56,7 +56,7 @@ public class Player extends Actor {
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getType() != CellType.WALL) {
+        if (nextCell.getType() == CellType.FLOOR) {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
                 fight(dx, dy);
@@ -70,13 +70,12 @@ public class Player extends Actor {
                 nextCell.setActor(this);
                 cell = nextCell;
             }
-            if (nextCell.getType() == CellType.DOOR) {
-                if (nextCell.getDoor().checkPlayerAccess(inventory)) {
-                    cell.setActor(null);
-                    nextCell.setActor(this);
-                    cell = nextCell;
-                    System.out.println(nextCell.getDoor().getTileName());
-                }
+        } else if (nextCell.getType() == CellType.DOOR) {
+            if (nextCell.getDoor().checkPlayerAccess(inventory)) {
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
+                System.out.println(nextCell.getDoor().getTileName());
             }
         }
     }

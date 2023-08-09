@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.data.Cell;
 public class Boss extends Actor {
     public Boss(Cell cell) {
         super(cell);
+        setHealth(30);
     }
     @Override
     public String getTileName() {
@@ -62,4 +63,8 @@ public class Boss extends Actor {
         return super.getHealth();
     }
 
+    @Override
+    public void setHealth(int health) {
+        super.setHealth(health);
+    }
 }

@@ -7,8 +7,12 @@ import com.codecool.dungeoncrawl.data.items.Item;
 import java.util.HashSet;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Player extends Actor {
+    boolean hasSword = false;
+    private Actor neighbourEnemy;
+    private final int baseStrength = 5;
     private Cell cell = getCell();
 
     public Set<Item> getInventory() {
@@ -28,32 +32,31 @@ public class Player extends Actor {
     }
 
     @Override
-    public String checkForEnemy(int dx, int dy) {
+    public Actor checkForEnemy(int dx, int dy) {
         Actor neighbourActor = cell.getNeighbor(dx, dy).getActor();
         if (neighbourActor != null) {
-            return neighbourActor.getTileName();
+            return neighbourActor;
         }
-        return "none";
+        return null;
     }
 
     public void fight(int dx, int dy) {
-        if (!checkForEnemy(dx, dy).equals(cell.getActor().getTileName()) && !checkForEnemy(dx, dy).equals("none")) {
+        if (!checkForEnemy(dx, dy).equals(cell.getActor()) && checkForEnemy(dx, dy) != null) {
             calculateDamage();
             cell.getNeighbor(dx, dy).getActor().calculateDamage();
         }
     }
 
-
     public String getTileName() {
         return "player";
     }
 
-@Override
+    @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-
         if (nextCell.getType() == CellType.FLOOR) {
             if (nextCell.getActor() != null) {
+                neighbourEnemy = nextCell.getActor();
                 fight(dx, dy);
             } else {
                 if (nextCell.getItem() != null) {
@@ -65,11 +68,7 @@ public class Player extends Actor {
                 nextCell.setActor(this);
                 cell = nextCell;
             }
-
-        }
-
-        if (nextCell.getType() == CellType.DOOR) {
-
+        } else if (nextCell.getType() == CellType.DOOR) {
             if (nextCell.getDoor().checkPlayerAccess(inventory)) {
                 cell.setActor(null);
                 nextCell.setActor(this);
@@ -77,12 +76,15 @@ public class Player extends Actor {
                 System.out.println(nextCell.getDoor().getTileName());
             }
         }
-
     }
 
     @Override
     public void calculateDamage() {
-        setHealth(getHealth() - 2);
+        int dmgMultiplier = 1;
+        if (!inventory.stream().filter(i -> i.getTileName().equals("sword")).collect(Collectors.toList()).isEmpty()) {
+            dmgMultiplier = 2;
+        }
+        neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (baseStrength * dmgMultiplier));
     }
 
 }

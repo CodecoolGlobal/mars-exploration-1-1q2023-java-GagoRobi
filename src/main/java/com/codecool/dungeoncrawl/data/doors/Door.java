@@ -13,7 +13,6 @@ import java.util.Set;
 public class Door implements Drawable {
     private Cell cell;
 
-
     public Door(Cell cell) {
         this.cell = cell;
         this.cell.setDoor(this);

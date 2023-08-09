@@ -32,11 +32,12 @@ public class MainStage {
     public void setHealthLabelText(String text) {
         this.statusPane.setHealthValue(text);
     }
+
     public void setInventoryLabelText(Set<Item> items) {
-        String inventory = "";
+        StringBuilder inventory = new StringBuilder();
         for (Item item : items) {
-            inventory += item.getTileName() + "\n";
+                inventory.append(" [ ").append(item.getTileName()).append(" ] ");
+            this.statusPane.setInventoryValues(inventory.toString());
         }
-        this.statusPane.setInventoryValues(inventory);
     }
 }

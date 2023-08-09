@@ -3,7 +3,6 @@ package com.codecool.dungeoncrawl.data.actors;
 import com.codecool.dungeoncrawl.data.Cell;
 
 public class Boss extends Actor {
-    private Cell cell = getCell();
     public Boss(Cell cell) {
         super(cell);
     }
@@ -20,17 +19,13 @@ public class Boss extends Actor {
         int XCoordinates = 0;
         int YCoordinates = 0;
         if (getCell().getNeighbor(0, 1).getActor() != null) {
-            XCoordinates = 0;
             YCoordinates = 1;
         } else if (getCell().getNeighbor(0, -1).getActor() != null) {
-            XCoordinates = 0;
             YCoordinates = -1;
         } else if (getCell().getNeighbor(1, 0).getActor() != null) {
             XCoordinates = 1;
-            YCoordinates = 0;
         } else if (getCell().getNeighbor(-1, 0).getActor() != null) {
             XCoordinates = -1;
-            YCoordinates = 0;
         }
         if (XCoordinates == 0 && YCoordinates == 0) {
             return null;
@@ -66,4 +61,5 @@ public class Boss extends Actor {
     public int getHealth() {
         return super.getHealth();
     }
+
 }

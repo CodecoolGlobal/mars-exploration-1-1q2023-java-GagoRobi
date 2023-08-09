@@ -22,11 +22,9 @@ public class Player extends Actor {
     private final Set<Item> inventory = new HashSet<>();
 
     public void pickUpItem(Item item) {
-        System.out.println("pick up called");
-        if (!inventory.add(item)) {
+        if(!inventory.add(item)) {
             inventory.add(item);
         }
-        System.out.println(inventory.contains(item));
     }
 
     public Player(Cell cell) {

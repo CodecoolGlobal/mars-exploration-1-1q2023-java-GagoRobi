@@ -26,7 +26,7 @@ public class StatusPane {
         inventoryValuesLabel = new Label();
         attackDamageTextLabel = new Label("[ Attack Damage: ]");
         attackDamageValueLabel = new Label();
-        enemyHealthTextLabel = new Label("[ Enemy Health: ]");
+        enemyHealthTextLabel = new Label("[ Boss Health: ]");
         enemyHealthValueLabel = new Label();
     }
 

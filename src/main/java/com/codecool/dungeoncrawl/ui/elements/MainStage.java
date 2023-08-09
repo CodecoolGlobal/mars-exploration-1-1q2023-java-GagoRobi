@@ -36,7 +36,7 @@ public class MainStage {
     public void setInventoryLabelText(Set<Item> items) {
         StringBuilder inventory = new StringBuilder();
         for (Item item : items) {
-                inventory.append(" [ ").append(item.getTileName()).append(" ] ");
+                inventory.append(" [ ").append(item.getTileName()).append(" ] ").append("\n");
             this.statusPane.setInventoryValues(inventory.toString());
         }
     }

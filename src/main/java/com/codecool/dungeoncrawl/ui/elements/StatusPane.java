@@ -16,9 +16,9 @@ public class StatusPane {
 
     public StatusPane() {
         ui = new GridPane();
-        healthTextLabel = new Label("Health: ");
+        healthTextLabel = new Label("[ Health: ]");
         healthValueLabel = new Label();
-        inventoryTextLabel = new Label("Inventory: ");
+        inventoryTextLabel = new Label("[ Inventory: ]");
         inventoryValuesLabel = new Label();
     }
 
@@ -31,7 +31,7 @@ public class StatusPane {
         ui.add(healthValueLabel, 1, 0);
 
         ui.add(inventoryTextLabel, 0, 1);
-        ui.add(inventoryValuesLabel, 3, 1);
+        ui.add(inventoryValuesLabel, 0, 2);
 
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);

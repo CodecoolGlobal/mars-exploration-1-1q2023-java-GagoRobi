@@ -47,6 +47,10 @@ public class Player extends Actor {
         if (!checkForNeighbouringActor(dx, dy).equals(cell.getActor()) && checkForNeighbouringActor(dx, dy) != null) {
             calculateDamage();
             cell.getNeighbor(dx, dy).getActor().calculateDamage();
+        } else if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
+            calculateDamage();
+            cell.getNeighbor(dx, dy).getActor().calculateDamage();
+            setBossDefeated(true);
         }
     }
 
@@ -61,8 +65,7 @@ public class Player extends Actor {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
                 fight(dx, dy);
-                // next if should later check for isBossDefeated true.
-                if(nextCell.getActor().getTileName().equals("princess")) {
+                if(nextCell.getActor().getTileName().equals("princess") && isBossDefeated) {
                     System.out.println("princess rescued");
                     setPrincessRescued(true);
                 }
@@ -96,5 +99,9 @@ public class Player extends Actor {
     }
     public void setPrincessRescued(boolean princessRescued) {
         isPrincessRescued = princessRescued;
+    }
+
+    public void setBossDefeated(boolean bossDefeated) {
+        isBossDefeated = bossDefeated;
     }
 }

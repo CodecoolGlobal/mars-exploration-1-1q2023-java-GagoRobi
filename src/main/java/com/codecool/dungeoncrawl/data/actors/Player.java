@@ -18,8 +18,11 @@ public class Player extends Actor {
     private final Set<Item> inventory = new HashSet<>();
 
     public void pickUpItem(Item item) {
-        inventory.add(item);
-        System.out.println("item picked");
+        System.out.println("pick up called");
+        if(!inventory.add(item)) {
+            inventory.add(item);
+        }
+        System.out.println(inventory.contains(item));
     }
 
     public Player(Cell cell) {

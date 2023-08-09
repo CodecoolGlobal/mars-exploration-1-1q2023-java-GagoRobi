@@ -19,7 +19,7 @@ public class Princess extends Actor {
     }
 
     @Override
-    public String checkForEnemy(int dx, int dy) {
+    public Actor checkForNeighbouringActor(int dx, int dy) {
         return null;
     }
 

@@ -21,7 +21,7 @@ public class Skeleton extends Actor {
     }
 
     @Override
-    public Actor checkForEnemy(int dx, int dy) {
+    public Actor checkForNeighbouringActor(int dx, int dy) {
         return null;
     }
 

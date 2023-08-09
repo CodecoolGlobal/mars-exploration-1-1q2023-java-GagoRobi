@@ -21,15 +21,48 @@ public class Skeleton extends Actor {
     }
 
     @Override
-    public String checkForEnemy(int dx, int dy) {
+    public Actor checkForEnemy(int dx, int dy) {
         return null;
+    }
+
+    public Actor findEnemy() {
+        int XCoordinates = 0;
+        int YCoordinates = 0;
+        if (getCell().getNeighbor(0, 1).getActor() != null) {
+            XCoordinates = 0;
+            YCoordinates = 1;
+        } else if (getCell().getNeighbor(0, -1).getActor() != null) {
+            XCoordinates = 0;
+            YCoordinates = -1;
+        } else if (getCell().getNeighbor(1, 0).getActor() != null) {
+            XCoordinates = 1;
+            YCoordinates = 0;
+        } else if (getCell().getNeighbor(-1, 0).getActor() != null) {
+            XCoordinates = -1;
+            YCoordinates = 0;
+        }
+        if (XCoordinates == 0 && YCoordinates == 0) {
+            return null;
+        } else {
+            return getCell().getNeighbor(XCoordinates, YCoordinates).getActor();
+        }
     }
 
     @Override
     public void calculateDamage() {
-        System.out.println("skeleton hp: "+getHealth());
-        setHealth(getHealth()-5);
-        if(getHealth() <=0){
+        System.out.println("skeleton hp: " + getHealth());
+        System.out.println("skeleton dmg: " +2);
+        Actor actor = findEnemy();
+        if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        }
+        if (getHealth() <= 0) {
             super.getCell().setActor(null);
         }
     }
@@ -44,7 +77,6 @@ public class Skeleton extends Actor {
     public String getTileName() {
         return "skeleton";
     }
-
 
 
 }

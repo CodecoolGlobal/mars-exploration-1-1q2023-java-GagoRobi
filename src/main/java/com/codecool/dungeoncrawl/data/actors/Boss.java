@@ -16,20 +16,42 @@ public class Boss extends Actor {
     public Actor checkForNeighbouringActor(int dx, int dy) {
         return null;
     }
+    public Actor findEnemy() {
+        int XCoordinates = 0;
+        int YCoordinates = 0;
+        if (getCell().getNeighbor(0, 1).getActor() != null) {
+            XCoordinates = 0;
+            YCoordinates = 1;
+        } else if (getCell().getNeighbor(0, -1).getActor() != null) {
+            XCoordinates = 0;
+            YCoordinates = -1;
+        } else if (getCell().getNeighbor(1, 0).getActor() != null) {
+            XCoordinates = 1;
+            YCoordinates = 0;
+        } else if (getCell().getNeighbor(-1, 0).getActor() != null) {
+            XCoordinates = -1;
+            YCoordinates = 0;
+        }
+        if (XCoordinates == 0 && YCoordinates == 0) {
+            return null;
+        } else {
+            return getCell().getNeighbor(XCoordinates, YCoordinates).getActor();
+        }
+    }
 
     @Override
     public void calculateDamage() {
         System.out.println("boss hp: " + getHealth());
-        System.out.println("boss dmg: " +2);
-        Actor actor = cell.getActor();
+        System.out.println("boss dmg: " + 4);
+        Actor actor = findEnemy();
         if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
+            actor.setHealth(actor.getHealth() - 4);
         } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
+            actor.setHealth(actor.getHealth() - 4);
         } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
+            actor.setHealth(actor.getHealth() - 4);
         } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
+            actor.setHealth(actor.getHealth() - 4);
         }
         if (getHealth() <= 0) {
             super.getCell().setActor(null);

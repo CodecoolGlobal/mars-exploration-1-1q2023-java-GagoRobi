@@ -44,7 +44,6 @@ public class MapLoader {
                         case 'a':
                             cell.setType(CellType.FLOOR);
                             map.setSkeleton2(new Skeleton(cell));
-                            map.getSkeleton2().setHealth(5);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

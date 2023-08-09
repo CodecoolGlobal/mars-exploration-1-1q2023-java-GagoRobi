@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 
 public class Skeleton extends Actor {
     private int moveCount = 0;
+    private String tileName = "skeleton";
 
     public void setMoveCount(int moveCount) {
         this.moveCount = moveCount;
@@ -31,13 +32,18 @@ public class Skeleton extends Actor {
     public void move(int dx, int dy) {
         if (getHealth() <= 0) {
             super.getCell().setActor(null);
+            return;
         }
-        System.out.println("moveB");
+        if(findEnemy() !=null){
+            System.out.println("before move found enemy");
+            calculateDamage();
+        }
         Cell nextCell = cell.getNeighbor(dx, dy);
-        cell.setActor(null);
-
-        nextCell.setActor(this);
-        cell = nextCell;
+        if (nextCell.getActor() == null) {
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
+        }
 
     }
 
@@ -50,17 +56,13 @@ public class Skeleton extends Actor {
         int XCoordinates = 0;
         int YCoordinates = 0;
         if (getCell().getNeighbor(0, 1).getActor() != null) {
-            XCoordinates = 0;
             YCoordinates = 1;
         } else if (getCell().getNeighbor(0, -1).getActor() != null) {
-            XCoordinates = 0;
             YCoordinates = -1;
         } else if (getCell().getNeighbor(1, 0).getActor() != null) {
             XCoordinates = 1;
-            YCoordinates = 0;
         } else if (getCell().getNeighbor(-1, 0).getActor() != null) {
             XCoordinates = -1;
-            YCoordinates = 0;
         }
         if (XCoordinates == 0 && YCoordinates == 0) {
             return null;
@@ -74,16 +76,13 @@ public class Skeleton extends Actor {
         System.out.println("skeleton hp: " + getHealth());
         System.out.println("skeleton dmg: " + 2);
         Actor actor = findEnemy();
-        if(actor != null){
-        if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
+        if (actor != null) {
+            System.out.println("actor found");
+            if (actor.getTileName().equals("player")) {
+                System.out.println("player found");
+                actor.setHealth(actor.getHealth() - 2);
+            }
         }
-
-        }
-
-        if (getHealth() <= 0) {
-            super.getCell().setActor(null);
-                  }
     }
 
     @Override
@@ -94,8 +93,10 @@ public class Skeleton extends Actor {
 
     @Override
     public String getTileName() {
-        return "skeleton";
+        return tileName;
     }
 
-
+    public void setTileName(String tileName) {
+        this.tileName = tileName;
+    }
 }

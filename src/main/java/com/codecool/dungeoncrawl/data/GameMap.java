@@ -49,8 +49,6 @@ public class GameMap {
         return skeleton2;
     }
     public void moveSkeleton(){
-        System.out.println("qwerty");
-
         if (skeleton2 != null) {
             if (skeleton2.getHealth() <= 0) {
                 skeleton2 = null;
@@ -64,9 +62,7 @@ public class GameMap {
                 }
             }
         } else {
-
-            System.out.println("skeleton dead");
-
+            System.out.println("skeleton2 dead");
         }
     }
 

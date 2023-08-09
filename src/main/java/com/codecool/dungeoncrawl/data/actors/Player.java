@@ -44,8 +44,10 @@ public class Player extends Actor {
 
     public void fight(int dx, int dy) {
         if (!checkForEnemy(dx, dy).equals(cell.getActor()) && checkForEnemy(dx, dy) != null) {
-            calculateDamage();
-            cell.getNeighbor(dx, dy).getActor().calculateDamage();
+                calculateDamage();
+            if (cell.getNeighbor(dx, dy).getActor() != null) {
+                cell.getNeighbor(dx, dy).getActor().calculateDamage();
+            }
         }
     }
 
@@ -79,6 +81,7 @@ public class Player extends Actor {
 
             }
         }
+        System.out.println(cell.getX() +"...." +cell.getY());
     }
 
     @Override
@@ -88,6 +91,10 @@ public class Player extends Actor {
             dmgMultiplier = 2;
         }
         neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (baseStrength * dmgMultiplier));
+        if (neighbourEnemy.getHealth() <= 0) {
+            neighbourEnemy.getCell().setActor(null);
+            //neighbourEnemy.move(-5,12);
+        }
     }
 
 }

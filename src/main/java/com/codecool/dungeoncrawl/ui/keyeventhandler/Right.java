@@ -12,7 +12,6 @@ public class Right implements KeyHandler {
         if(code.equals(event.getCode())){
         map.getPlayer().move(1, 0);
         map.moveSkeleton();
-            System.out.println("right");
         }
 
     }

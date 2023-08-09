@@ -10,7 +10,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Player extends Actor {
-    boolean hasSword = false;
+
+    boolean isBossDefeated = false;
+    boolean isPrincessRescued = false;
     private Actor neighbourEnemy;
     private final int baseStrength = 5;
     private Cell cell = getCell();
@@ -32,7 +34,7 @@ public class Player extends Actor {
     }
 
     @Override
-    public Actor checkForEnemy(int dx, int dy) {
+    public Actor checkForNeighbouringActor(int dx, int dy) {
         Actor neighbourActor = cell.getNeighbor(dx, dy).getActor();
         if (neighbourActor != null) {
             return neighbourActor;
@@ -40,10 +42,18 @@ public class Player extends Actor {
         return null;
     }
 
+
     public void fight(int dx, int dy) {
-        if (!checkForEnemy(dx, dy).equals(cell.getActor()) && checkForEnemy(dx, dy) != null) {
-            calculateDamage();
-            cell.getNeighbor(dx, dy).getActor().calculateDamage();
+        if (!checkForNeighbouringActor(dx, dy).equals(cell.getActor()) && checkForNeighbouringActor(dx, dy) != null) {
+            if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
+                System.out.println("boss attacked");
+                calculateDamage();
+                cell.getNeighbor(dx, dy).getActor().calculateDamage();
+                setBossDefeated(true);
+            } else {
+                calculateDamage();
+                cell.getNeighbor(dx, dy).getActor().calculateDamage();
+            }
         }
     }
 
@@ -58,6 +68,10 @@ public class Player extends Actor {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
                 fight(dx, dy);
+                if(neighbourEnemy.getTileName().equals("princess") && isBossDefeated) {
+                    System.out.println("princess rescued");
+                    setPrincessRescued(true);
+                }
             } else {
                 if (nextCell.getItem() != null) {
                     System.out.println(nextCell.getItem().getTileName());
@@ -86,5 +100,11 @@ public class Player extends Actor {
         }
         neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (baseStrength * dmgMultiplier));
     }
+    public void setPrincessRescued(boolean princessRescued) {
+        isPrincessRescued = princessRescued;
+    }
 
+    public void setBossDefeated(boolean bossDefeated) {
+        isBossDefeated = bossDefeated;
+    }
 }

@@ -24,8 +24,13 @@ public class Player extends Actor {
     private final Set<Item> inventory = new HashSet<>();
 
     public void pickUpItem(Item item) {
-        if(!inventory.add(item)) {
+        if(!inventory.contains(item)) {
             inventory.add(item);
+            if(item.getTileName().equals("sword")){
+                strength *= 2;
+            }
+        } else {
+            System.out.println("item already in inventory");
         }
     }
 
@@ -100,9 +105,6 @@ public class Player extends Actor {
 
     @Override
     public boolean calculateDamage() {
-        if (!inventory.stream().filter(i -> i.getTileName().equals("sword")).collect(Collectors.toList()).isEmpty()) {
-            strength *= 2;
-        }
         neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (strength));
         return true;
     }

@@ -24,7 +24,7 @@ public class Princess extends Actor {
     }
 
     @Override
-    public void calculateDamage() {
-
+    public boolean calculateDamage() {
+        return true;
     }
 }

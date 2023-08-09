@@ -48,8 +48,11 @@ public class Player extends Actor {
             if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
                 System.out.println("boss attacked");
                 calculateDamage();
-                cell.getNeighbor(dx, dy).getActor().calculateDamage();
-                setBossDefeated(true);
+                if(cell.getNeighbor(dx, dy).getActor().calculateDamage()) {
+                    setBossDefeated(true);
+                } else {
+                    System.out.println("boss is alive");
+                }
             } else {
                 calculateDamage();
                 cell.getNeighbor(dx, dy).getActor().calculateDamage();
@@ -93,12 +96,13 @@ public class Player extends Actor {
     }
 
     @Override
-    public void calculateDamage() {
+    public boolean calculateDamage() {
         int dmgMultiplier = 1;
         if (!inventory.stream().filter(i -> i.getTileName().equals("sword")).collect(Collectors.toList()).isEmpty()) {
             dmgMultiplier = 2;
         }
         neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (baseStrength * dmgMultiplier));
+        return true;
     }
     public void setPrincessRescued(boolean princessRescued) {
         isPrincessRescued = princessRescued;

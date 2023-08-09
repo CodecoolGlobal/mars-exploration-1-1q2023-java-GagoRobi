@@ -36,7 +36,7 @@ public class Boss extends Actor {
     }
 
     @Override
-    public void calculateDamage() {
+    public boolean calculateDamage() {
         System.out.println("boss hp: " + getHealth());
         System.out.println("boss dmg: " + 4);
         Actor actor = findEnemy();
@@ -51,12 +51,17 @@ public class Boss extends Actor {
         }
         if (getHealth() <= 0) {
             super.getCell().setActor(null);
+            return true;
+        } else {
+            return false;
         }
     }
+
     @Override
     public void move(int dx, int dy) {
 
     }
+
 
     @Override
     public int getHealth() {

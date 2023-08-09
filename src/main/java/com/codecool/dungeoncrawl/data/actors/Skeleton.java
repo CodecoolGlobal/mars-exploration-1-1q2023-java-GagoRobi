@@ -49,7 +49,7 @@ public class Skeleton extends Actor {
     }
 
     @Override
-    public void calculateDamage() {
+    public boolean calculateDamage() {
         System.out.println("skeleton hp: " + getHealth());
         System.out.println("skeleton dmg: " +2);
         Actor actor = findEnemy();
@@ -64,7 +64,9 @@ public class Skeleton extends Actor {
         }
         if (getHealth() <= 0) {
             super.getCell().setActor(null);
+            return true;
         }
+        return false;
     }
 
     @Override

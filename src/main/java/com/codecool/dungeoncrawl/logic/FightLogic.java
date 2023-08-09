@@ -4,8 +4,9 @@ import com.codecool.dungeoncrawl.data.actors.Actor;
 
 public interface FightLogic {
 
+
     public Actor checkForNeighbouringActor(int dx, int dy);
-    public void calculateDamage();
+    public boolean calculateDamage();
 
 
 }

@@ -76,6 +76,7 @@ public class Player extends Actor {
                 nextCell.setActor(this);
                 cell = nextCell;
                 System.out.println(nextCell.getDoor().getTileName());
+
             }
         }
     }

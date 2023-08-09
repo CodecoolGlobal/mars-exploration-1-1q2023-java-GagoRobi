@@ -7,16 +7,37 @@ import com.codecool.dungeoncrawl.data.CellType;
 import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.logic.FightLogic;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
 public class Skeleton extends Actor {
+    private int moveCount = 0;
+
+    public void setMoveCount(int moveCount) {
+        this.moveCount = moveCount;
+    }
+
+    public int getMoveCount() {
+        return moveCount;
+    }
+
+    private Cell cell = getCell();
+
     public Skeleton(Cell cell) {
         super(cell);
     }
 
     @Override
     public void move(int dx, int dy) {
+        if (getHealth() <= 0) {
+            super.getCell().setActor(null);
+        }
+        System.out.println("moveB");
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        cell.setActor(null);
+
+        nextCell.setActor(this);
+        cell = nextCell;
 
     }
 
@@ -51,20 +72,18 @@ public class Skeleton extends Actor {
     @Override
     public void calculateDamage() {
         System.out.println("skeleton hp: " + getHealth());
-        System.out.println("skeleton dmg: " +2);
+        System.out.println("skeleton dmg: " + 2);
         Actor actor = findEnemy();
+        if(actor != null){
         if (actor.getTileName().equals("player")) {
             actor.setHealth(actor.getHealth() - 2);
-        } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
-        } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
-        } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 2);
         }
+
+        }
+
         if (getHealth() <= 0) {
             super.getCell().setActor(null);
-        }
+                  }
     }
 
     @Override

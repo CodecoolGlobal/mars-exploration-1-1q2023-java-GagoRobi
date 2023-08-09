@@ -19,10 +19,29 @@ public class Boss extends Actor {
 
     @Override
     public void calculateDamage() {
-
+        System.out.println("boss hp: " + getHealth());
+        System.out.println("boss dmg: " +2);
+        Actor actor = cell.getActor();
+        if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        } else if (actor.getTileName().equals("player")) {
+            actor.setHealth(actor.getHealth() - 2);
+        }
+        if (getHealth() <= 0) {
+            super.getCell().setActor(null);
+        }
     }
     @Override
     public void move(int dx, int dy) {
 
+    }
+
+    @Override
+    public int getHealth() {
+        return super.getHealth();
     }
 }

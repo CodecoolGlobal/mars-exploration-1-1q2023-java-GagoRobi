@@ -40,4 +40,5 @@ public class MainStage {
             this.statusPane.setInventoryValues(inventory.toString());
         }
     }
+    public void setDamageLabelText(String text) {this.statusPane.setDamageValue(text);}
 }

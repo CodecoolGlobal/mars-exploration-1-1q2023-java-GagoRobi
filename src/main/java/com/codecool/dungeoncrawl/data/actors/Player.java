@@ -14,7 +14,7 @@ public class Player extends Actor {
     boolean isBossDefeated = false;
     boolean isPrincessRescued = false;
     private Actor neighbourEnemy;
-    private final int baseStrength = 5;
+    public int strength = 5;
     private Cell cell = getCell();
 
     public Set<Item> getInventory() {
@@ -42,6 +42,9 @@ public class Player extends Actor {
         return null;
     }
 
+    public int getStrength() {
+        return strength;
+    }
 
     public void fight(int dx, int dy) {
         if (!checkForNeighbouringActor(dx, dy).equals(cell.getActor()) && checkForNeighbouringActor(dx, dy) != null) {
@@ -97,11 +100,10 @@ public class Player extends Actor {
 
     @Override
     public boolean calculateDamage() {
-        int dmgMultiplier = 1;
         if (!inventory.stream().filter(i -> i.getTileName().equals("sword")).collect(Collectors.toList()).isEmpty()) {
-            dmgMultiplier = 2;
+            strength *= 2;
         }
-        neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (baseStrength * dmgMultiplier));
+        neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (strength));
         return true;
     }
     public void setPrincessRescued(boolean princessRescued) {

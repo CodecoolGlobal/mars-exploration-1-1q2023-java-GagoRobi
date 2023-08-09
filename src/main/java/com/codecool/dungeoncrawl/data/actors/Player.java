@@ -45,12 +45,15 @@ public class Player extends Actor {
 
     public void fight(int dx, int dy) {
         if (!checkForNeighbouringActor(dx, dy).equals(cell.getActor()) && checkForNeighbouringActor(dx, dy) != null) {
-            calculateDamage();
-            cell.getNeighbor(dx, dy).getActor().calculateDamage();
-        } else if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
-            calculateDamage();
-            cell.getNeighbor(dx, dy).getActor().calculateDamage();
-            setBossDefeated(true);
+            if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
+                System.out.println("boss attacked");
+                calculateDamage();
+                cell.getNeighbor(dx, dy).getActor().calculateDamage();
+                setBossDefeated(true);
+            } else {
+                calculateDamage();
+                cell.getNeighbor(dx, dy).getActor().calculateDamage();
+            }
         }
     }
 

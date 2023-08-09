@@ -10,11 +10,19 @@ import java.util.Set;
 
 public class Player extends Actor {
     private Cell cell = getCell();
+
+    public Set<Item> getInventory() {
+        return new HashSet<>(inventory);
+    }
+
     private final Set<Item> inventory = new HashSet<>();
 
     public void pickUpItem(Item item) {
-        inventory.add(item);
-        System.out.println("item picked");
+        System.out.println("pick up called");
+        if(!inventory.add(item)) {
+            inventory.add(item);
+        }
+        System.out.println(inventory.contains(item));
     }
 
     public Player(Cell cell) {

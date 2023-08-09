@@ -55,7 +55,6 @@ public class UI {
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
 
-
                 } else if(cell.getItem() != null) {
                 Tiles.drawTile(context, cell.getItem(), x, y);
             } else {
@@ -64,5 +63,6 @@ public class UI {
             }
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
+        mainStage.setInventoryLabelText(logic.getPlayerInventory());
     }
 }

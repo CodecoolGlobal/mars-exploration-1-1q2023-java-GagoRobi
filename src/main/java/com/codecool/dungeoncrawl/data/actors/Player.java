@@ -28,7 +28,10 @@ public class Player extends Actor {
             inventory.add(item);
         }
     }
+    public void consumeItem(Item item) {
+            inventory.remove(item);
 
+    }
     public Player(Cell cell) {
         super(cell);
     }

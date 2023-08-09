@@ -8,6 +8,7 @@ import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Princess;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
 import com.codecool.dungeoncrawl.data.doors.Door;
+import com.codecool.dungeoncrawl.data.items.HpPotion;
 import com.codecool.dungeoncrawl.data.items.Key;
 import com.codecool.dungeoncrawl.data.items.Sword;
 
@@ -54,6 +55,10 @@ public class MapLoader {
                         case 'k':
                             cell.setType(CellType.FLOOR);
                             new Key(cell);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.FLOOR);
+                            new HpPotion(cell);
                             break;
                         case 'd':
                             cell.setType(CellType.DOOR);

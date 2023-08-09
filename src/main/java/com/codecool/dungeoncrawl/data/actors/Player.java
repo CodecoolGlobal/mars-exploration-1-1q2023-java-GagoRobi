@@ -65,7 +65,7 @@ public class Player extends Actor {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
                 fight(dx, dy);
-                if(nextCell.getActor().getTileName().equals("princess") && isBossDefeated) {
+                if(neighbourEnemy.getTileName().equals("princess") && isBossDefeated) {
                     System.out.println("princess rescued");
                     setPrincessRescued(true);
                 }

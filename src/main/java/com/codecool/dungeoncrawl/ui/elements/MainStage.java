@@ -41,4 +41,5 @@ public class MainStage {
         }
     }
     public void setDamageLabelText(String text) {this.statusPane.setDamageValue(text);}
+    public void setEnemyHealthLabelText(String text) {this.statusPane.setEnemyHealthValue(text);}
 }

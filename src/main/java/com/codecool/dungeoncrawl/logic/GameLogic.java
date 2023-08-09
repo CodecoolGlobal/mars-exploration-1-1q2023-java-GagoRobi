@@ -38,8 +38,9 @@ public class GameLogic {
     public String getPlayerStrength () {
         return Integer.toString(map.getPlayer().getStrength());
     }
-
-
+    public String getBossHealth () {
+        return Integer.toString(map.getBoss().getHealth());
+    }
     public GameMap getMap() {
         return map;
     }

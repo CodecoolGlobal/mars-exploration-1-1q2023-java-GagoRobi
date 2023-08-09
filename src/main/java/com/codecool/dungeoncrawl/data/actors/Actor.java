@@ -36,6 +36,7 @@ public abstract class Actor implements Drawable, FightLogic {
         this.health = health;
     }
 
+
     public Cell getCell() {
         return cell;
     }

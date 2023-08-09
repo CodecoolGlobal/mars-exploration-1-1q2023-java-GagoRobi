@@ -21,7 +21,7 @@ public class Skeleton extends Actor {
     }
 
     @Override
-    public String checkForEnemy(int dx, int dy) {
+    public Actor checkForEnemy(int dx, int dy) {
         return null;
     }
 
@@ -51,6 +51,7 @@ public class Skeleton extends Actor {
     @Override
     public void calculateDamage() {
         System.out.println("skeleton hp: " + getHealth());
+        System.out.println("skeleton dmg: " +2);
         Actor actor = findEnemy();
         if (actor.getTileName().equals("player")) {
             actor.setHealth(actor.getHealth() - 2);

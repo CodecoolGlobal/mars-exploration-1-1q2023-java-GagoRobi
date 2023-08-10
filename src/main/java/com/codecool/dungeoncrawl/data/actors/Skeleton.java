@@ -78,7 +78,7 @@ public class Skeleton extends Actor {
         Actor actor = findEnemy();
 
         if (actor != null) {
-            System.out.println("actor found");
+            //System.out.println("actor found");
             if (actor.getTileName().equals("player")) {
                 System.out.println("player found");
                 actor.setHealth(actor.getHealth() - 2);

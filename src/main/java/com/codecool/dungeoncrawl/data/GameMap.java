@@ -73,6 +73,19 @@ public class GameMap {
             System.out.println("skeleton2 dead");
         }*/
     }
+    public void moveBoss() {
+        System.out.println(boss.getCell().getNeighbor(1, 1).getActor());
+        if(boss.getCell().getNeighbor(1,1).getActor() != null) {
+            switch (boss.getCell().getNeighbor(1, 1).getActor().getTileName()) {
+                case "player" :
+                    System.out.println("player found");
+                    boss.move(1,1);
+                    break;
+                case "floor" :
+                    System.out.println("empty next to boss");
+            }
+        }
+    }
 
 
     public int getWidth() {

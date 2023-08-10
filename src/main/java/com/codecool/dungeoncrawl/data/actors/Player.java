@@ -15,6 +15,7 @@ public class Player extends Actor {
     boolean isPrincessRescued = false;
     private Actor neighbourEnemy;
     public int strength = 5;
+
     private Cell cell = getCell();
 
     public Set<Item> getInventory() {
@@ -132,9 +133,11 @@ public class Player extends Actor {
     public void setPrincessRescued(boolean princessRescued) {
         isPrincessRescued = princessRescued;
 
+
     }
 
     public void setBossDefeated(boolean bossDefeated) {
         isBossDefeated = bossDefeated;
     }
+
 }

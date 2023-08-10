@@ -5,9 +5,18 @@ import com.codecool.dungeoncrawl.data.GameMap;
 import com.codecool.dungeoncrawl.data.items.Item;
 
 import java.util.Set;
+import com.codecool.dungeoncrawl.data.actors.Troll;
+
 
 public class GameLogic {
     private GameMap map;
+
+
+
+    public String getPlayerHealth() {
+        return Integer.toString(map.getPlayer().getHealth());
+    }
+
 
     public GameLogic() {
         this.map = MapLoader.loadMap();
@@ -30,9 +39,6 @@ public class GameLogic {
         return map.getCell(x, y);
     }
 
-    public String getPlayerHealth() {
-        return Integer.toString(map.getPlayer().getHealth());
-    }
     public Set<Item> getPlayerInventory() {return map.getPlayer().getInventory();}
     public String getPlayerStrength () {
         return Integer.toString(map.getPlayer().getStrength());
@@ -40,7 +46,17 @@ public class GameLogic {
     public String getBossHealth () {
         return Integer.toString(map.getBoss().getHealth());
     }
+
     public GameMap getMap() {
         return map;
     }
+
+    public void monsterMovement(){
+        if(map.getTroll().getHealth() >0){
+            map.getTroll().moveAround();
+        }
+
+    }
+
+
 }

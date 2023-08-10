@@ -43,11 +43,7 @@ public class Player extends Actor {
 
     @Override
     public Actor checkForNeighbouringActor(int dx, int dy) {
-        Actor neighbourActor = cell.getNeighbor(dx, dy).getActor();
-        if (neighbourActor != null) {
-            return neighbourActor;
-        }
-        return null;
+        return cell.getNeighbor(dx, dy).getActor();
     }
 
     public int getStrength() {
@@ -55,6 +51,7 @@ public class Player extends Actor {
     }
 
     public void fight(int dx, int dy) {
+
         if (!checkForNeighbouringActor(dx, dy).equals(cell.getActor()) && checkForNeighbouringActor(dx, dy) != null) {
             if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
                 System.out.println("boss attacked");
@@ -81,11 +78,12 @@ public class Player extends Actor {
         if (nextCell.getType() == CellType.FLOOR) {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
-                fight(dx, dy);
                 if(neighbourEnemy.getTileName().equals("princess") && isBossDefeated) {
+                    neighbourEnemy.setHealth(20);
                     System.out.println("princess rescued");
                     setPrincessRescued(true);
                 }
+                fight(dx, dy);
             } else {
                 if (nextCell.getItem() != null) {
                     System.out.println(nextCell.getItem().getTileName());
@@ -102,17 +100,22 @@ public class Player extends Actor {
                 nextCell.setActor(this);
                 cell = nextCell;
                 System.out.println(nextCell.getDoor().getTileName());
+
             }
         }
+        System.out.println(cell.getX() +"...." +cell.getY());
     }
 
     @Override
     public boolean calculateDamage() {
+
         neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (strength));
+
         return true;
     }
     public void setPrincessRescued(boolean princessRescued) {
         isPrincessRescued = princessRescued;
+
     }
 
     public void setBossDefeated(boolean bossDefeated) {

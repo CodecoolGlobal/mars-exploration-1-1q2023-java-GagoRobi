@@ -13,7 +13,6 @@ public class Heal implements KeyHandler {
 
     @Override
     public void perform(KeyEvent event, GameMap map) {
-        System.out.println("keyPressed");
         if (code.equals(event.getCode())){
             if (map.getPlayer().getInventory().stream().anyMatch(item -> item.getTileName().equals("HP-potion"))) {
                 map.getPlayer().setHealth(20);

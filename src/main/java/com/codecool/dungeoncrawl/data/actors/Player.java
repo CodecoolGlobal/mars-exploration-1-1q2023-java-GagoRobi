@@ -75,7 +75,7 @@ public class Player extends Actor {
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getType() == CellType.FLOOR) {
+        if (nextCell.getType() == CellType.FLOOR || nextCell.getType() == CellType.WEB) {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
                 if(neighbourEnemy.getTileName().equals("princess") && isBossDefeated) {
@@ -86,7 +86,6 @@ public class Player extends Actor {
                 fight(dx, dy);
             } else {
                 if (nextCell.getItem() != null) {
-                    System.out.println(nextCell.getItem().getTileName());
                     pickUpItem(nextCell.getItem());
                     nextCell.setItem(null);
                 }
@@ -99,11 +98,13 @@ public class Player extends Actor {
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
-                System.out.println(nextCell.getDoor().getTileName());
 
             }
+        } else if (nextCell.getType() == CellType.FIRE) {
+            setHealth(0);
+
+
         }
-        System.out.println(cell.getX() +"...." +cell.getY());
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.logic.GameLogic;
+import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.ui.elements.MainStage;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
 import javafx.scene.Scene;
@@ -34,11 +35,13 @@ public class UI {
     }
 
     public void setUpPain(Stage primaryStage) {
+
         Scene scene = mainStage.getScene();
         primaryStage.setScene(scene);
         logic.setup();
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
+
     }
     private void onKeyPressed(KeyEvent keyEvent) {
         for (KeyHandler keyHandler : keyHandlers) {
@@ -48,14 +51,19 @@ public class UI {
     }
 
     public void refresh() {
+
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < logic.getMapWidth(); x++) {
             for (int y = 0; y < logic.getMapHeight(); y++) {
                 Cell cell = logic.getCell(x, y);
                 if (cell.getActor() != null) {
+                    if(cell.getActor().getHealth() <= 0){
+                        cell.setActor(null);
+                        Tiles.drawTile(context, cell, x, y);
+                    }else{
                     Tiles.drawTile(context, cell.getActor(), x, y);
-
+                    }
                 } else if(cell.getItem() != null) {
                 Tiles.drawTile(context, cell.getItem(), x, y);
             } else {
@@ -65,11 +73,13 @@ public class UI {
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
         mainStage.setInventoryLabelText(logic.getPlayerInventory());
+
         mainStage.setDamageLabelText(logic.getPlayerStrength());
         if (!Objects.equals(logic.getBossHealth(), "0")) {
             mainStage.setEnemyHealthLabelText(logic.getBossHealth());
         } else {
             mainStage.setEnemyHealthLabelText("DEAD");
+
         }
     }
 }

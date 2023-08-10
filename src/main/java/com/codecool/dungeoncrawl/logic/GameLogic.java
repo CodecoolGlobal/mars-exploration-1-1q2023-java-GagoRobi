@@ -22,7 +22,6 @@ public class GameLogic {
     }
 
     public void setup() {
-        System.out.println("setup");
 
     }
 

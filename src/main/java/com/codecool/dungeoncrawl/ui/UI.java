@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class UI {
@@ -64,5 +65,11 @@ public class UI {
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
         mainStage.setInventoryLabelText(logic.getPlayerInventory());
+        mainStage.setDamageLabelText(logic.getPlayerStrength());
+        if (!Objects.equals(logic.getBossHealth(), "0")) {
+            mainStage.setEnemyHealthLabelText(logic.getBossHealth());
+        } else {
+            mainStage.setEnemyHealthLabelText("DEAD");
+        }
     }
 }

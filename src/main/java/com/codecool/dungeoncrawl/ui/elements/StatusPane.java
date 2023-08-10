@@ -9,13 +9,25 @@ public class StatusPane {
     public static final int RIGHT_PANEL_WIDTH = 200;
     public static final int RIGHT_PANEL_PADDING = 10;
     private GridPane ui;
-    private Label healthTextLabel;
-    private Label healthValueLabel;
+    private final Label healthTextLabel;
+    private final Label healthValueLabel;
+    private final Label inventoryTextLabel;
+    private final Label inventoryValuesLabel;
+    private final Label attackDamageTextLabel;
+    private final Label attackDamageValueLabel;
+    private final Label enemyHealthTextLabel;
+    private final Label enemyHealthValueLabel;
 
     public StatusPane() {
         ui = new GridPane();
-        healthTextLabel = new Label("Health: ");
+        healthTextLabel = new Label("[ Health: ]");
         healthValueLabel = new Label();
+        inventoryTextLabel = new Label("[ Inventory: ]");
+        inventoryValuesLabel = new Label();
+        attackDamageTextLabel = new Label("[ Attack Damage: ]");
+        attackDamageValueLabel = new Label();
+        enemyHealthTextLabel = new Label("[ Boss Health: ]");
+        enemyHealthValueLabel = new Label();
     }
 
     public BorderPane build() {
@@ -26,6 +38,15 @@ public class StatusPane {
         ui.add(healthTextLabel, 0, 0);
         ui.add(healthValueLabel, 1, 0);
 
+        ui.add(inventoryTextLabel, 0, 1);
+        ui.add(inventoryValuesLabel, 0, 2);
+
+        ui.add(attackDamageTextLabel, 0, 3);
+        ui.add(attackDamageValueLabel, 0, 4);
+
+        ui.add(enemyHealthTextLabel, 0, 5);
+        ui.add(enemyHealthValueLabel, 0, 6);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
         return borderPane;
@@ -34,4 +55,7 @@ public class StatusPane {
     public void setHealthValue(String text) {
         healthValueLabel.setText(text);
     }
+    public void setInventoryValues(String text) {inventoryValuesLabel.setText(text);}
+    public void setDamageValue(String text) {attackDamageValueLabel.setText(text);}
+    public void setEnemyHealthValue(String text) {enemyHealthValueLabel.setText(text);}
 }

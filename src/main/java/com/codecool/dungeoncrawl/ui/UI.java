@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.ui;
 
 import com.codecool.dungeoncrawl.data.Cell;
 import com.codecool.dungeoncrawl.logic.GameLogic;
+import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.ui.elements.MainStage;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
 import javafx.animation.Animation;
@@ -14,7 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 
@@ -38,11 +39,13 @@ public class UI {
     }
 
     public void setUpPain(Stage primaryStage) {
+
         Scene scene = mainStage.getScene();
         primaryStage.setScene(scene);
         logic.setup();
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
+
     }
 
     public void moveMonsters() {
@@ -63,6 +66,7 @@ public class UI {
     }
 
     public void refresh() {
+
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < logic.getMapWidth(); x++) {
@@ -73,7 +77,7 @@ public class UI {
                         cell.setActor(null);
                         Tiles.drawTile(context, cell, x, y);
                     }else{
-                        Tiles.drawTile(context, cell.getActor(), x, y);
+                    Tiles.drawTile(context, cell.getActor(), x, y);
                     }
 
                 } else if(cell.getItem() != null) {
@@ -84,5 +88,14 @@ public class UI {
             }
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
+        mainStage.setInventoryLabelText(logic.getPlayerInventory());
+
+        mainStage.setDamageLabelText(logic.getPlayerStrength());
+        if (!Objects.equals(logic.getBossHealth(), "0")) {
+            mainStage.setEnemyHealthLabelText(logic.getBossHealth());
+        } else {
+            mainStage.setEnemyHealthLabelText("DEAD");
+
+        }
     }
 }

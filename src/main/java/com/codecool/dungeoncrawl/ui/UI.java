@@ -5,14 +5,18 @@ import com.codecool.dungeoncrawl.logic.GameLogic;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.ui.elements.MainStage;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.KeyHandler;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+import javafx.util.Duration;
 import java.util.Objects;
+import java.util.Random;
 import java.util.Set;
 
 public class UI {
@@ -43,9 +47,20 @@ public class UI {
         scene.setOnKeyPressed(this::onKeyPressed);
 
     }
+
+    public void moveMonsters() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+            logic.monsterMovement();
+            refresh();
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+
     private void onKeyPressed(KeyEvent keyEvent) {
         for (KeyHandler keyHandler : keyHandlers) {
             keyHandler.perform(keyEvent, logic.getMap());
+
         }
         refresh();
     }
@@ -64,6 +79,7 @@ public class UI {
                     }else{
                     Tiles.drawTile(context, cell.getActor(), x, y);
                     }
+
                 } else if(cell.getItem() != null) {
                 Tiles.drawTile(context, cell.getItem(), x, y);
             } else {

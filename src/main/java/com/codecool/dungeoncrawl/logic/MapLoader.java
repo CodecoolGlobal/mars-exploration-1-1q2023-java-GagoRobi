@@ -7,6 +7,7 @@ import com.codecool.dungeoncrawl.data.actors.Boss;
 import com.codecool.dungeoncrawl.data.actors.Player;
 import com.codecool.dungeoncrawl.data.actors.Princess;
 import com.codecool.dungeoncrawl.data.actors.Skeleton;
+import com.codecool.dungeoncrawl.data.actors.Troll;
 import com.codecool.dungeoncrawl.data.doors.Door;
 import com.codecool.dungeoncrawl.data.items.HpPotion;
 import com.codecool.dungeoncrawl.data.items.Key;
@@ -85,6 +86,10 @@ public class MapLoader {
                             break;
                         case 'c':
                             cell.setType(CellType.CANDLE);
+                        case 't':
+                            cell.setType(CellType.FLOOR);
+                            map.setTroll(new Troll(cell));
+                            cell.getActor().setHealth(15);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

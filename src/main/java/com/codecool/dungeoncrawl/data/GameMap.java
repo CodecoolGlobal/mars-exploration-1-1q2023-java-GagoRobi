@@ -79,24 +79,24 @@ public class GameMap {
         }*/
     }
     public void moveBoss() {
-        System.out.println(boss.getCell().getNeighbor(1, 1).getActor());
-
-        for (int i = -1; i < 3; i++) {
-            for (int j = -1; j < 3; j++) {
-                if(boss.getCell().getNeighbor(i,j).getActor() != null) {
-                    switch (boss.getCell().getNeighbor(i, j).getActor().getTileName()) {
-                        case "player" :
-                            System.out.println("player found");
-                            boss.move(i,j);
-                            break;
-                        case "floor" :
-                            System.out.println("empty next to boss");
+        try {
+            for (int i = -1; i < 3; i++) {
+                for (int j = -1; j < 3; j++) {
+                    if(boss.getCell().getNeighbor(i,j).getActor() != null) {
+                        switch (boss.getCell().getNeighbor(i, j).getActor().getTileName()) {
+                            case "player" :
+                                System.out.println("player found");
+                                boss.move(i,j);
+                                break;
+                            case "floor" :
+                                System.out.println("empty next to boss");
+                        }
                     }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
     }
 
 

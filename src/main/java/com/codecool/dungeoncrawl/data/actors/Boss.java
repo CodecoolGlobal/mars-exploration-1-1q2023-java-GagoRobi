@@ -31,8 +31,10 @@ public class Boss extends Actor {
             XCoordinates = -1;
         }
         if (XCoordinates == 0 && YCoordinates == 0) {
+            System.out.println("zero coordinates");
             return null;
         } else {
+            System.out.println("enemy found");
             return getCell().getNeighbor(XCoordinates, YCoordinates).getActor();
         }
     }
@@ -41,16 +43,12 @@ public class Boss extends Actor {
     public boolean calculateDamage() {
         System.out.println("boss hp: " + getHealth());
         System.out.println("boss dmg: " + 4);
-        Actor actor = findEnemy();
+        /*Actor actor = findEnemy();
+
         if (actor.getTileName().equals("player")) {
             actor.setHealth(actor.getHealth() - 4);
-        } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 4);
-        } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 4);
-        } else if (actor.getTileName().equals("player")) {
-            actor.setHealth(actor.getHealth() - 4);
-        }
+        }*/
+
         if (getHealth() <= 0) {
             super.getCell().setActor(null);
             return true;
@@ -63,11 +61,13 @@ public class Boss extends Actor {
     public void move(int dx, int dy) {
         try {
             Cell nextCell = cell.getNeighbor(dx, dy);
-            if (cell.getNeighbor(dx,dy).getType() != CellType.WALL && cell.getNeighbor(dx,dy).getType() != CellType.CANDLE) {
-                cell.setActor(null);
-                nextCell.setActor(this);
-                cell = nextCell;
-            }
+            if (cell.getNeighbor(dx,dy).getType() != CellType.WALL && cell.getNeighbor(dx,dy).getType() != CellType.CANDLE
+                && cell.getNeighbor(dx,dy).getType() != CellType.DOOR && !cell.getNeighbor(dx,dy).getTileName().equals("player")
+                ) {
+                    cell.setActor(null);
+                    nextCell.setActor(this);
+                    cell = nextCell;
+                }
         } catch (Exception exception) {
             exception.printStackTrace();
         }

@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.data.actors;
 
 import com.codecool.dungeoncrawl.data.Cell;
+import com.codecool.dungeoncrawl.data.CellType;
 
 public class Boss extends Actor {
     private Cell cell = getCell();
@@ -60,12 +61,16 @@ public class Boss extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-
+        try {
+            Cell nextCell = cell.getNeighbor(dx, dy);
+            if (cell.getNeighbor(dx,dy).getType() != CellType.WALL && cell.getNeighbor(dx,dy).getType() != CellType.CANDLE) {
+                cell.setActor(null);
+                nextCell.setActor(this);
+                cell = nextCell;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
 

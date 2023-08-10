@@ -82,7 +82,7 @@ public class GameMap {
                     switch (boss.getCell().getNeighbor(i, j).getActor().getTileName()) {
                         case "player" :
                             System.out.println("player found");
-                            boss.move(1,1);
+                            boss.move(i,j);
                             break;
                         case "floor" :
                             System.out.println("empty next to boss");

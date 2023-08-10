@@ -1,5 +1,6 @@
 package com.codecool.dungeoncrawl.logic;
 
+import com.codecool.dungeoncrawl.data.actors.Troll;
 import com.codecool.dungeoncrawl.ui.UI;
 import com.codecool.dungeoncrawl.ui.keyeventhandler.*;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ public class Game extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 
     @Override
@@ -23,7 +25,10 @@ public class Game extends Application {
         this.ui = new UI(logic, keyHandlers);
         ui.setUpPain(primaryStage);
 
+        ui.moveMonsters();
+
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+        this.logic.getMap().getTroll();
     }
 }

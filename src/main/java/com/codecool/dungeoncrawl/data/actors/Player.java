@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Player extends Actor {
+
+
     private Cell cell = getCell();
     private final Set<Item> inventory = new HashSet<>();
 
@@ -78,5 +80,7 @@ public class Player extends Actor {
     public void calculateDamage() {
         setHealth(getHealth() - 2);
     }
+
+
 
 }

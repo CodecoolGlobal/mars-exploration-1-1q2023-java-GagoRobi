@@ -96,8 +96,7 @@ public class UI {
         } else {
             mainStage.setEnemyHealthLabelText("DEAD");
         }
-
-        if (!Objects.equals(logic.getPlayerHealth(), "0") && logic.isRescueSuccess()) {
+        if (Integer.parseInt(logic.getPlayerHealth()) < 1) {
             mainStage.setGameStatusLabelText("YOU LOST!");
         } else if (logic.isBossDefeated() && logic.isRescueSuccess()) {
             mainStage.setGameStatusLabelText("YOU WON!");

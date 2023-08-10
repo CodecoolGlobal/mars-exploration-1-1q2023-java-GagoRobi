@@ -35,7 +35,6 @@ public class Skeleton extends Actor {
             return;
         }
         if(findEnemy() !=null){
-            System.out.println("before move found enemy");
             calculateDamage();
         }
         Cell nextCell = cell.getNeighbor(dx, dy);
@@ -78,7 +77,6 @@ public class Skeleton extends Actor {
         Actor actor = findEnemy();
 
         if (actor != null) {
-            System.out.println("actor found");
             if (actor.getTileName().equals("player")) {
                 System.out.println("player found");
                 actor.setHealth(actor.getHealth() - 2);

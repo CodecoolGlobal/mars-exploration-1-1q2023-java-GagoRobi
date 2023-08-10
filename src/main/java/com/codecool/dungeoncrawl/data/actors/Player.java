@@ -24,19 +24,21 @@ public class Player extends Actor {
     private final Set<Item> inventory = new HashSet<>();
 
     public void pickUpItem(Item item) {
-        if(!inventory.contains(item)) {
+        if (!inventory.contains(item)) {
             inventory.add(item);
-            if(item.getTileName().equals("sword")){
+            if (item.getTileName().equals("sword")) {
                 strength *= 2;
             }
         } else {
             System.out.println("item already in inventory");
         }
     }
+
     public void consumeItem(Item item) {
-            inventory.remove(item);
+        inventory.remove(item);
 
     }
+
     public Player(Cell cell) {
         super(cell);
     }
@@ -56,7 +58,7 @@ public class Player extends Actor {
             if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
                 System.out.println("boss attacked");
                 calculateDamage();
-                if(cell.getNeighbor(dx, dy).getActor().calculateDamage()) {
+                if (cell.getNeighbor(dx, dy).getActor().calculateDamage()) {
                     setBossDefeated(true);
                 } else {
                     System.out.println("boss is alive");
@@ -75,15 +77,10 @@ public class Player extends Actor {
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getType() == CellType.FLOOR || nextCell.getType() == CellType.WEB) {
+        if (checkNextCell(nextCell)) {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
-                if(neighbourEnemy.getTileName().equals("princess") && isBossDefeated) {
-                    neighbourEnemy.setHealth(20);
-                    System.out.println("princess rescued");
-                    setPrincessRescued(true);
-                }
-                fight(dx, dy);
+                checkIfEnemyOrAlly(neighbourEnemy,dx,dy);
             } else {
                 if (nextCell.getItem() != null) {
                     pickUpItem(nextCell.getItem());
@@ -93,18 +90,35 @@ public class Player extends Actor {
                 nextCell.setActor(this);
                 cell = nextCell;
             }
-        } else if (nextCell.getType() == CellType.DOOR) {
+        }
+    }
+    private void checkIfEnemyOrAlly(Actor neighbourEnemy,int dx,int dy){
+        if(neighbourEnemy.getTileName().equals("princess")){
+            if(isBossDefeated){
+                System.out.println("princess rescued");
+                setPrincessRescued(true);
+            }
+
+        }  else {
+        fight(dx, dy);
+    }
+
+    }
+    private boolean checkNextCell(Cell nextCell) {
+        CellType type = nextCell.getType();
+        if (type == CellType.FLOOR || type == CellType.WEB) {
+            return true;
+        } else if (type == CellType.DOOR) {
             if (nextCell.getDoor().checkPlayerAccess(inventory)) {
                 cell.setActor(null);
                 nextCell.setActor(this);
                 cell = nextCell;
-
             }
-        } else if (nextCell.getType() == CellType.FIRE) {
-            setHealth(0);
-
-
         }
+        if (nextCell.getType() == CellType.FIRE) {
+            setHealth(0);
+        }
+        return false;
     }
 
     @Override
@@ -114,6 +128,7 @@ public class Player extends Actor {
 
         return true;
     }
+
     public void setPrincessRescued(boolean princessRescued) {
         isPrincessRescued = princessRescued;
 

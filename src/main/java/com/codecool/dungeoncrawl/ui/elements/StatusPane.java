@@ -17,6 +17,8 @@ public class StatusPane {
     private final Label attackDamageValueLabel;
     private final Label enemyHealthTextLabel;
     private final Label enemyHealthValueLabel;
+    private final Label gameStatusTextLabel;
+    private final Label gameStatusValueLabel;
 
     public StatusPane() {
         ui = new GridPane();
@@ -28,6 +30,8 @@ public class StatusPane {
         attackDamageValueLabel = new Label();
         enemyHealthTextLabel = new Label("[ Boss Health: ]");
         enemyHealthValueLabel = new Label();
+        gameStatusTextLabel = new Label(" [ GAME STATUS ] ");
+        gameStatusValueLabel = new Label();
     }
 
     public BorderPane build() {
@@ -47,6 +51,9 @@ public class StatusPane {
         ui.add(enemyHealthTextLabel, 0, 5);
         ui.add(enemyHealthValueLabel, 0, 6);
 
+        ui.add(gameStatusTextLabel, 0, 7);
+        ui.add(gameStatusValueLabel,0,8);
+
         BorderPane borderPane = new BorderPane();
         borderPane.setRight(ui);
         return borderPane;
@@ -58,4 +65,5 @@ public class StatusPane {
     public void setInventoryValues(String text) {inventoryValuesLabel.setText(text);}
     public void setDamageValue(String text) {attackDamageValueLabel.setText(text);}
     public void setEnemyHealthValue(String text) {enemyHealthValueLabel.setText(text);}
+    public void setGameStatusValue(String text) {gameStatusValueLabel.setText(text);}
 }

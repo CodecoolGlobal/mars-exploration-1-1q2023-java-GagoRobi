@@ -17,7 +17,12 @@ public class GameLogic {
         return Integer.toString(map.getPlayer().getHealth());
     }
 
-
+    public boolean isRescueSuccess () {
+        return map.getPlayer().isPrincessRescued();
+    }
+    public boolean isBossDefeated () {
+        return map.getPlayer().isBossDefeated();
+    }
     public GameLogic() {
         this.map = MapLoader.loadMap();
     }

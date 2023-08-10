@@ -140,4 +140,11 @@ public class Player extends Actor {
         isBossDefeated = bossDefeated;
     }
 
+    public boolean isPrincessRescued() {
+        return isPrincessRescued;
+    }
+
+    public boolean isBossDefeated() {
+        return isBossDefeated;
+    }
 }

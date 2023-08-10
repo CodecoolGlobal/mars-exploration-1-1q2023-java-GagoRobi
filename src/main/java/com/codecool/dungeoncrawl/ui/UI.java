@@ -89,13 +89,18 @@ public class UI {
         }
         mainStage.setHealthLabelText(logic.getPlayerHealth());
         mainStage.setInventoryLabelText(logic.getPlayerInventory());
-
         mainStage.setDamageLabelText(logic.getPlayerStrength());
+
         if (!Objects.equals(logic.getBossHealth(), "0")) {
             mainStage.setEnemyHealthLabelText(logic.getBossHealth());
         } else {
             mainStage.setEnemyHealthLabelText("DEAD");
+        }
 
+        if (!Objects.equals(logic.getPlayerHealth(), "0") && logic.isRescueSuccess()) {
+            mainStage.setGameStatusLabelText("YOU LOST!");
+        } else if (logic.isBossDefeated() && logic.isRescueSuccess()) {
+            mainStage.setGameStatusLabelText("YOU WON!");
         }
     }
 }

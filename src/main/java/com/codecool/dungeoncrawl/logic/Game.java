@@ -29,6 +29,5 @@ public class Game extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
-        this.logic.getMap().getTroll();
     }
 }

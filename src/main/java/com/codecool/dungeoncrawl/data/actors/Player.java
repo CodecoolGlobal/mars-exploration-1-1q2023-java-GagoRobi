@@ -10,7 +10,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Player extends Actor {
-    boolean hasSword = false;
+
+    boolean isBossDefeated = false;
+    boolean isPrincessRescued = false;
     private Actor neighbourEnemy;
     private final int baseStrength = 5;
     private Cell cell = getCell();
@@ -22,30 +24,37 @@ public class Player extends Actor {
     private final Set<Item> inventory = new HashSet<>();
 
     public void pickUpItem(Item item) {
-        System.out.println("pick up called");
-        if (!inventory.add(item)) {
+        if(!inventory.add(item)) {
             inventory.add(item);
         }
-        System.out.println(inventory.contains(item));
     }
+    public void consumeItem(Item item) {
+            inventory.remove(item);
 
+    }
     public Player(Cell cell) {
         super(cell);
     }
 
     @Override
-    public Actor checkForEnemy(int dx, int dy) {
-        Actor neighbourActor = cell.getNeighbor(dx, dy).getActor();
-        if (neighbourActor != null) {
-            return neighbourActor;
-        }
-        return null;
+    public Actor checkForNeighbouringActor(int dx, int dy) {
+        return cell.getNeighbor(dx, dy).getActor();
     }
 
+
     public void fight(int dx, int dy) {
-        if (!checkForEnemy(dx, dy).equals(cell.getActor()) && checkForEnemy(dx, dy) != null) {
+
+        if (!checkForNeighbouringActor(dx, dy).equals(cell.getActor()) && checkForNeighbouringActor(dx, dy) != null) {
+            if (checkForNeighbouringActor(dx, dy).getTileName().equals("boss")) {
+                System.out.println("boss attacked");
                 calculateDamage();
-            if (cell.getNeighbor(dx, dy).getActor() != null) {
+                if(cell.getNeighbor(dx, dy).getActor().calculateDamage()) {
+                    setBossDefeated(true);
+                } else {
+                    System.out.println("boss is alive");
+                }
+            } else {
+                calculateDamage();
                 cell.getNeighbor(dx, dy).getActor().calculateDamage();
             }
         }
@@ -61,6 +70,11 @@ public class Player extends Actor {
         if (nextCell.getType() == CellType.FLOOR) {
             if (nextCell.getActor() != null) {
                 neighbourEnemy = nextCell.getActor();
+                if(neighbourEnemy.getTileName().equals("princess") && isBossDefeated) {
+                    neighbourEnemy.setHealth(20);
+                    System.out.println("princess rescued");
+                    setPrincessRescued(true);
+                }
                 fight(dx, dy);
             } else {
                 if (nextCell.getItem() != null) {
@@ -85,16 +99,26 @@ public class Player extends Actor {
     }
 
     @Override
-    public void calculateDamage() {
+    public boolean calculateDamage() {
         int dmgMultiplier = 1;
         if (!inventory.stream().filter(i -> i.getTileName().equals("sword")).collect(Collectors.toList()).isEmpty()) {
             dmgMultiplier = 2;
         }
         neighbourEnemy.setHealth(neighbourEnemy.getHealth() - (baseStrength * dmgMultiplier));
-        if (neighbourEnemy.getHealth() <= 0) {
-            neighbourEnemy.getCell().setActor(null);
-            //neighbourEnemy.move(-5,12);
-        }
+ //HEAD
+//        if (neighbourEnemy.getHealth() <= 0) {
+//            neighbourEnemy.getCell().setActor(null);
+//            //neighbourEnemy.move(-5,12);
+//        }
+
+        return true;
+    }
+    public void setPrincessRescued(boolean princessRescued) {
+        isPrincessRescued = princessRescued;
+
     }
 
+    public void setBossDefeated(boolean bossDefeated) {
+        isBossDefeated = bossDefeated;
+    }
 }

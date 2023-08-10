@@ -48,7 +48,7 @@ public class Skeleton extends Actor {
     }
 
     @Override
-    public Actor checkForEnemy(int dx, int dy) {
+    public Actor checkForNeighbouringActor(int dx, int dy) {
         return null;
     }
 
@@ -72,17 +72,20 @@ public class Skeleton extends Actor {
     }
 
     @Override
-    public void calculateDamage() {
+    public boolean calculateDamage() {
         System.out.println("skeleton hp: " + getHealth());
         System.out.println("skeleton dmg: " + 2);
         Actor actor = findEnemy();
+
         if (actor != null) {
             System.out.println("actor found");
             if (actor.getTileName().equals("player")) {
                 System.out.println("player found");
                 actor.setHealth(actor.getHealth() - 2);
             }
+
         }
+        return false;
     }
 
     @Override

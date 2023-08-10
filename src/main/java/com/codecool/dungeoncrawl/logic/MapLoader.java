@@ -86,6 +86,7 @@ public class MapLoader {
                             break;
                         case 'c':
                             cell.setType(CellType.CANDLE);
+                            break;
                         case 't':
                             cell.setType(CellType.FLOOR);
                             map.setTroll(new Troll(cell));

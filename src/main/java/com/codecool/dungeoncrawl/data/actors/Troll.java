@@ -36,13 +36,18 @@ public class Troll extends Actor {
     }
 
     @Override
-    public void calculateDamage() {
+    public Actor checkForNeighbouringActor(int dx, int dy) {
+        return null;
+    }
+
+    @Override
+    public boolean calculateDamage() {
         System.out.println("Troll hp: "+getHealth());
         setHealth(getHealth()-5);
         if(getHealth() <=0){
             super.getCell().setActor(null);
         }
-
+        return false;
     }
 
     @Override

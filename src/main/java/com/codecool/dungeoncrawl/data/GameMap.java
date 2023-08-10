@@ -69,9 +69,9 @@ public class GameMap {
                     skeleton2.setMoveCount(skeleton2.getMoveCount()+1);
                 }
             }
-        } else {
+        } /*else {
             System.out.println("skeleton2 dead");
-        }
+        }*/
     }
 
 

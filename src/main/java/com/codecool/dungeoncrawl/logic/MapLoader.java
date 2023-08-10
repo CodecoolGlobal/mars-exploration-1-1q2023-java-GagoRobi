@@ -77,6 +77,15 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setBoss(new Boss(cell));
                             break;
+                        case 'w':
+                            cell.setType(CellType.WEB);
+                            break;
+                        case 'F':
+                            cell.setType(CellType.FIRE);
+                            break;
+                        case 'c':
+                            cell.setType(CellType.CANDLE);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

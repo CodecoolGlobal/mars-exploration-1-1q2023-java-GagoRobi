@@ -36,58 +36,53 @@ The project is using `java` and `javafx`, so you'll need <a href="https://www.or
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is a Maven project, so you need to open pom.xml. The project uses
-JavaFX, so use the javafx Maven plugin to build and run the program. 
-Build using `mvn javafx:compile`, and run 
-using` mvn javafx:run` .
 
-### Prerequisites
 
-This is an example of how to list things you need to use the software 
-and how to install them.
-* npm
-  ```sh
-  npm install 
-  ```
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repository
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/CodecoolGlobal/mars-exploration-1-1q2023-java-GagoRobi
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+3. This is a Maven project, so you need to open pom.xml. 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+4. The project uses
+   JavaFX, so use the javafx Maven plugin to build and run the program.
+   Build using `mvn javafx:compile`, and run
+   using` mvn javafx:run` .
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Upon starting the game it should open a new window.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
+![img.png](src/main/resources/readmeImgs/img.png) <- This is your character in the bottom left part of the map!
+<br/>
+* You can move with the 'arrow' keys!
+* Bumping into enemies will trigger a fight causing both of you to lose some health. Different enemies have different damage output!
+* Walking into fire ![img_1.png](src/main/resources/readmeImgs/img_1.png) will instantly reduce your Healt Points to zero, causing th death of the character.
+* Your job is to defeat the capturer ![img_3.png](src/main/resources/readmeImgs/img_3.png) of the Princess ![img_2.png](src/main/resources/readmeImgs/img_2.png) then save her!
+* There are three item you can pick up! <br/>
+![img_4.png](src/main/resources/readmeImgs/img_4.png) - The sword will increse the damage you deal to enemies (by 5)!<br/>
+![img_5.png](src/main/resources/readmeImgs/img_5.png) - (E) A health potion that will regenerate your health to 20 HP! This is a one use item, that you can drink with the button `E`!
+<br/> ![img_6.png](src/main/resources/readmeImgs/img_6.png) - The key is necessary for opening the doors to the final room!
+* You DON'T! have to defeat all enemies, but you must defeat the creature in the last room!
+* The game status and Inventory is displayed int the upper right corner of the app.<br/>
+![img_7.png](src/main/resources/readmeImgs/img_7.png)<br/>
+You can see your inventory, Hp, Dmg, and also the Win or Lose message.
+![img_8.png](src/main/resources/readmeImgs/img_8.png)
 
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
@@ -98,18 +93,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Project Link: [https://github.com/CodecoolGlobal/mars-exploration-1-1q2023-java-GagoRobi]( https://github.com/CodecoolGlobal/mars-exploration-1-1q2023-java-GagoRobi)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 

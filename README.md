@@ -45,13 +45,9 @@ The project is using `java` and `javafx`, so you'll need <a href="https://www.or
    ```sh
    git clone https://github.com/CodecoolGlobal/mars-exploration-1-1q2023-java-GagoRobi
    ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. This is a Maven project, so you need to open pom.xml. 
+2. This is a Maven project, so you need to open pom.xml. 
 
-4. The project uses
+3. The project uses
    JavaFX, so use the javafx Maven plugin to build and run the program.
    Build using `mvn javafx:compile`, and run
    using` mvn javafx:run` .
